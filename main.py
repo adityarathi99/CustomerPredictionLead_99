@@ -77,7 +77,7 @@ def submit():
             for indx in lettersIndexes:
                 max_users_tweets[dup].append(tweets[indx])
 
-        ml = MonkeyLearn('a8c37b171cf59684144bdac57bb516b2582f0d3f')
+        ml = MonkeyLearn('8fe96afb313e34ec9580e406202a4ac5eeb6a7a6')
         # def sentiment_classifer(*args):
         #     for result in args:
         #         sentiment = result["classifications"][0]["tag_name"]
