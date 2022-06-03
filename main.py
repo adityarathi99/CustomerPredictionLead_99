@@ -6,6 +6,7 @@ from functools import reduce
 from monkeylearn import MonkeyLearn
 import random
 
+# we are initiliaze app with name paramters with flask server. basically our server name is called app
 app = Flask(__name__)
 user_keyword = ""
 users_tweet_count = {}
@@ -77,17 +78,23 @@ def submit():
             for indx in lettersIndexes:
                 max_users_tweets[dup].append(tweets[indx])
 
-        ml = MonkeyLearn('8fe96afb313e34ec9580e406202a4ac5eeb6a7a6')
+        ml = MonkeyLearn('62abe415fd3322033257f7bb21749aec56eafcff')
         # def sentiment_classifer(*args):
         #     for result in args:
         #         sentiment = result["classifications"][0]["tag_name"]
-        #         confidence = result["classifications"][0]["confidence"]
+        #          confidence = result["classifications"][0]["confidence"]
+        # 425f439cf78142e243fbf7830c899389cca997ae
+        # 67962446281340c12b320fab5cf6a4aaf36fe043
+        # b4bd284b17d300d1eca288b298184e63dcc80ba2
         #         store = [sentiment,confidence]
         #         sentiment_confidence[user_tweet].append(store)
+        #  1fe6a68502d14019a4de92f2df47b94e883bdddd
+        # ed6956ddfe9da5936daa51a31542d8aace74e336
+        # fd75a512f373d20ec8aa23179a2b3369c36b231d
         # print(max_users_tweets)
 
         sentiment_confidence = {}
-        # in the above hash, user name is stored as key, values are sentiment and cofidence
+        # in the above hash, user name is stored as key, values are sentiment and confidence
         for user_tweet in max_users_tweets:
             # data is tweets of all the users
             # when the loop runs for the first time data will have tweets of the highest user(all of em)
@@ -134,7 +141,8 @@ def submit():
             elif final_score == 0:
                 showdown = "50%"
             else:
-                showdown = f"{final_score}%"
+                showdown = "{:.2f}".format(final_score)
+                # showdown = f"{final_score}%"
             # print(showdown)
             user_scores[user_name] = showdown
 
@@ -192,10 +200,9 @@ def submit():
             user_with_sentiment_count[sen] = final_append
         # print(user_with_sentiment_count)
 
-
-
-
-        return render_template("submit.html", names=max_users_tweets, tweet_no=users_tweet_count,sentiment = user_with_sentiment_count)
+        return render_template("submit.html", names=max_users_tweets, tweet_no=users_tweet_count,
+                               sentiment=user_with_sentiment_count, scores=user_scores)
+        # return render_template("submit.html", names=max_users_tweets, tweet_no=users_tweet_count,sentiment = user_with_sentiment_count)
     # return render_template("submit.html")
 
 
